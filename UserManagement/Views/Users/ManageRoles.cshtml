@@ -1,0 +1,29 @@
+﻿@model UserRolesVM
+@{ 
+    ViewData["Title"] = "User Roles";
+}
+<h1 class="display-4">Manage User Roles</h1>
+<form method="post">
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3>@Model.UserName</h3>
+            Add/Remove Roles
+        </div>
+        <div class="card-body">
+            <input type="hidden" asp-for="UserId" />
+            @for (int i = 0; i < Model.Roles.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="Roles[i].RoleName" />
+                    <input class="form-check-input" asp-for="Roles[i].IsSelected" />
+                    <label class="form-check-label" asp-for="Roles[i].RoleName">@Model.Roles[i].RoleName</label>
+                </div>
+            }
+            <div class="text-danger" asp-validation-summary="All"></div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary">Save</button>
+            <a class="btn btn-secondary" asp-action="Index">Back</a>
+        </div>
+    </div>
+</form>

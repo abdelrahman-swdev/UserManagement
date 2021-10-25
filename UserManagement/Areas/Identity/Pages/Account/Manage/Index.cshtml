@@ -1,0 +1,63 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<form id="profile-form" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Username"></label>
+                    <input asp-for="Username" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.FullName"></label>
+                    <input asp-for="Input.FullName" class="form-control" />
+                    <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.PhoneNumber"></label>
+                    <input asp-for="Input.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+                <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @if (Model.Input.ProfilePicture is not null)
+                {
+                    <img class="img-thumbnail" id="profilePicture" alt="Profile Picture" 
+                         src="data:image/*;base64,@(Convert.ToBase64String(Model.Input.ProfilePicture))" />
+                }
+                else
+                {
+                    <img id="profilePicture" alt="Profile Picture" class="img-thumbnail" src="~/images/avatar.jpg" />
+                }
+            <div class="custom-file mt-2">
+                <input asp-for="Input.ProfilePicture"
+                       class="custom-file-input"
+                       type="file"
+                       accept="image/*" 
+                       onchange="changeProfilePic(this.files[0])"/>
+                <label asp-for="Input.ProfilePicture" id="profilePictureLabel" class="custom-file-label">Profile Picture ..</label>
+                <span asp-validation-for="Input.ProfilePicture" class="text-danger"></span>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function changeProfilePic(file) {
+            document.getElementById('profilePicture').src = window.URL.createObjectURL(file);
+            document.getElementById('profilePictureLabel').innerHTML = file.name;
+        }
+    </script>
+}

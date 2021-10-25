@@ -1,0 +1,42 @@
+﻿@model UserFormVM
+@{ 
+    ViewData["Title"] = "Save User";
+}
+
+<h4 class="display-4">Save User</h4>
+@if(ViewBag.UserSaved == true)
+{
+    <div class="alert alert-success">
+        User Saved Successfully
+    </div>
+}
+<form method="post" asp-action="Save">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label class="col-form-label" asp-for="UserName"></label>
+        <input class="form-control" asp-for="UserName" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label class="col-form-label" asp-for="FullName"></label>
+        <input class="form-control" asp-for="FullName" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Password"></label>
+        <input class="form-control" asp-for="Password"/>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <button class="btn btn-primary">Save</button>
+    <a class="btn btn-secondary" asp-action="Index">Back</a>
+</form>
+
+@section Scripts{ 
+    <partial name="_ValidationScriptsPartial" />
+}

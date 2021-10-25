@@ -1,0 +1,11 @@
+﻿@model AddRoleVM
+
+<form method="post" asp-action="Create">
+    <div class="input-group mb-3">
+        <input asp-for="RoleName" class="form-control" placeholder="new role.." />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+</form>
