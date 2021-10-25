@@ -38,9 +38,6 @@ namespace UserManagement
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
 
-            // add auto mapper
-            services.AddAutoMapper(typeof(Startup));
-
             services.AddControllersWithViews();
         }
 
